@@ -33,7 +33,7 @@ A Docker-based local development environment for Odoo 17.0 with Nginx reverse pr
 1. **Clone and navigate to the project:**
 
    ```bash
-   git clone https://github.com/yourusername/odoo-local-dev.git
+   git clone https://github.com/icecloud-lab/odoo-local-dev.git
    cd odoo-local-dev
    ```
 

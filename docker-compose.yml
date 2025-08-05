@@ -1,0 +1,74 @@
+services:
+  odoo:
+    image: odoo:${ODOO_TAG}
+    container_name: odoo-dev
+    command: odoo -d ${ODOO_HOSTNAME} -i base --dev all 
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./config:/etc/odoo
+      - filestore:/var/lib/odoo/filestore
+      - sessions:/var/lib/odoo/sessions:rw
+      - modules:/usr/lib/python3/dist-packages/odoo/addons:ro
+    networks:
+      - odoo
+    env_file: .env
+  nginx:
+    image: nginx:${NGINX_TAG}
+    container_name: nginx-dev # --without-demo all
+    volumes:
+      - ./nginx/templates:/etc/nginx/templates
+      - ./nginx/certs:/etc/certs
+      - ./data/modules:/www/data/odoo/modules:ro
+      - ./addons:/www/data/odoo/addons:ro
+      - ./data/filestore:/www/data/odoo/filestore:ro
+    ports:
+      - 80:80
+      - 443:443
+    env_file: .env
+    networks:
+      - odoo
+  postgres:
+    image: postgres:${POSTGRES_TAG}
+    restart: unless-stopped
+    container_name: postgres-dev
+    volumes:
+      - ./postgres-data/data:/var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - odoo
+  pgadmin:
+    image: dpage/pgadmin4:${PGADMIN_TAG}
+    restart: always
+    container_name: pgadmin-dev
+    depends_on:
+      - postgres
+    env_file: .env
+    networks:
+      - odoo
+
+networks:
+  odoo:
+    name: odoo
+
+volumes:
+  modules:
+    name: odoo_modules
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/modules/
+      o: bind
+  sessions:
+    name: odoo_sessions
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/sessions/
+      o: bind
+  filestore:
+    name: odoo_filestore
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/data/filestore/
+      o: bind

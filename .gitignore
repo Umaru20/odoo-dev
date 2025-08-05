@@ -1,0 +1,5 @@
+data
+nginx/certs
+postgres-data
+**.tmpl
+.env

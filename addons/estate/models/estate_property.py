@@ -1,0 +1,27 @@
+from odoo import models, fields
+
+class EstateProperty(models.Model):
+    _name = "estate.property"
+    _description = "Real Estate Property"
+
+    name = fields.Char(string="Property Name", required=True)
+    description = fields.Text(string="Property Description")
+    postcode = fields.Char(string="Postcode")
+    date_availability = fields.Date(string="Date of Availability")
+    expected_price = fields.Float(string="Expected Selling Price", required=True)
+    selling_price = fields.Float(string="Final Selling Price", readonly=True, copy=False)
+    bedrooms = fields.Integer(string="Number of Bedrooms")
+    living_area = fields.Integer(string="Living Area (sqm)")
+    facades = fields.Integer(string="Number of Facades")
+    garage = fields.Boolean(string="Includes Garage?")
+    garden = fields.Boolean(string="Includes Garden?")
+    garden_area = fields.Integer(string="Garden Area (sqm)")
+    garden_orientation = fields.Selection(
+        [
+            ('north', 'Facing North'),
+            ('south', 'Facing South'),
+            ('east', 'Facing East'),
+            ('west', 'Facing West')
+        ],
+        string="Garden Orientation"
+    )

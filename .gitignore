@@ -3,3 +3,6 @@ nginx/certs
 postgres-data
 **.tmpl
 .env
+uj.xml
+scripts.sh
+**__pycache__**

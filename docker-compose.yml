@@ -18,15 +18,16 @@ services:
     volumes:
       - ./nginx/templates:/etc/nginx/templates
       - ./nginx/certs:/etc/certs
-      - ./data/modules:/www/data/odoo/modules:ro
-      - ./addons:/www/data/odoo/addons:ro
-      - ./data/filestore:/www/data/odoo/filestore:ro
     ports:
       - 80:80
       - 443:443
     env_file: .env
     networks:
       - odoo
+    depends_on:
+      - odoo
+      - postgres
+      - pgadmin
   postgres:
     image: postgres:${POSTGRES_TAG}
     restart: unless-stopped
@@ -53,22 +54,7 @@ networks:
 volumes:
   modules:
     name: odoo_modules
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/modules/
-      o: bind
   sessions:
     name: odoo_sessions
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/sessions/
-      o: bind
   filestore:
     name: odoo_filestore
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/data/filestore/
-      o: bind

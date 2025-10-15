@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <odoo>
+    
     <!-- Tree view -->
     <record id="view_estate_property_tree" model="ir.ui.view">
         <field name="name">estate.property.tree</field>

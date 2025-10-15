@@ -13,7 +13,7 @@
 
  'data': [
     'security/ir.model.access.csv',
-    'views/estate_property_views.xml',# <-- add this line
+    'views/estate_property_views.xml',# <!-- add this line -->
 ],
   'application': True,
 }

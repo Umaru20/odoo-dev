@@ -16,6 +16,7 @@ class EstateProperty(models.Model):
     selling_price = fields.Float(string="Selling Price", readonly=True, copy=False)
      # 👇 Add this line
     active = fields.Boolean(default=True)
+
     bedrooms = fields.Integer(string="Bedrooms")
     living_area = fields.Integer(string="Living Area (sqm)")
     facades = fields.Integer(string="Facades")
@@ -25,6 +26,20 @@ class EstateProperty(models.Model):
     garden_orientation = fields.Selection(
         [('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
         string="Garden Orientation"
+    )
+     # New field
+    state = fields.Selection(
+        [
+            ('new', 'New'),
+            ('offer_received', 'Offer Received'),
+            ('offer_accepted', 'Offer Accepted'),
+            ('sold', 'Sold'),
+            ('cancelled', 'Cancelled'),
+        ],
+        string="Status",
+        required=True,
+        copy=False,
+        default='new'
     )
 
 '''from odoo import models, fields

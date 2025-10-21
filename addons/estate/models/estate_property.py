@@ -14,6 +14,8 @@ class EstateProperty(models.Model):
     # Selling price should not be editable by users
     # and should not be copied when duplicating a record
     selling_price = fields.Float(string="Selling Price", readonly=True, copy=False)
+     # 👇 Add this line
+    active = fields.Boolean(default=True)
     bedrooms = fields.Integer(string="Bedrooms")
     living_area = fields.Integer(string="Living Area (sqm)")
     facades = fields.Integer(string="Facades")

@@ -15,6 +15,7 @@
     'security/ir.model.access.csv',
     'views/estate_property_views.xml',# <!-- add this line -->
     'views/estate_menus.xml',           # menu loads after action
+    
 ],
   'application': True,
 }

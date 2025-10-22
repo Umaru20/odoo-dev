@@ -1,0 +1,30 @@
+<odoo>
+    <!-- Search View -->
+    <record id="view_estate_property_search" model="ir.ui.view">
+        <field name="name">estate.property.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Search Properties">
+                <!-- Basic search field -->
+                <field name="name" string="Property Name"/>
+
+                <!-- Filters -->
+                <filter string="With Garden" name="filter_garden" domain="[('garden','=',True)]"/>
+                <filter string="Without Garden" name="filter_no_garden" domain="[('garden','=',False)]"/>
+
+                <filter string="New" name="filter_new" domain="[('state','=','new')]"/>
+                <filter string="Offer Received" name="filter_offer_received" domain="[('state','=','offer_received')]"/>
+                <filter string="Offer Accepted" name="filter_offer_accepted" domain="[('state','=','offer_accepted')]"/>
+                <filter string="Sold" name="filter_sold" domain="[('state','=','sold')]"/>
+                <filter string="Cancelled" name="filter_cancelled" domain="[('state','=','cancelled')]"/>
+
+                <!-- Group By Options -->
+                <group expand="0" string="Group By">
+                    <filter string="Bedrooms" name="group_by_bedrooms" context="{'group_by': 'bedrooms'}"/>
+                    <filter string="Garden" name="group_by_garden" context="{'group_by': 'garden'}"/>
+                    <filter string="State" name="group_by_state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>
